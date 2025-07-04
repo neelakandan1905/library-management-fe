@@ -1,0 +1,41 @@
+.add-book-header {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.list-container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.table-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.table-border-cstm {
+    border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+
+.custom-popover {
+  --bs-popover-max-width: 200px;
+  --bs-popover-border-color: var(--bd-violet-bg);
+  --bs-popover-header-bg: var(--bd-violet-bg);
+  --bs-popover-header-color: var(--bs-white);
+  --bs-popover-body-padding-x: 1rem;
+  --bs-popover-body-padding-y: .5rem;
+}

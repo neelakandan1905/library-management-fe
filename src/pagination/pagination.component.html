@@ -1,0 +1,15 @@
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item cursor-pointer" [ngClass]="{'disabled cursor-not-allowed': currentPage === 1}">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+        </li>
+        @for (page of pages; track $index) {
+        <li class="page-item cursor-pointer" [ngClass]="{'active': page === currentPage}" (click)="onPageChange(page)">
+            <a class="page-link" href="javascript:void(0)">{{page}}</a>
+        </li>
+        }
+        <li class="page-item cursor-pointer" [ngClass]="{'disabled cursor-not-allowed': currentPage === totalPages}">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>

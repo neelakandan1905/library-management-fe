@@ -1,0 +1,60 @@
+<div class="add-book-header">
+  <h2 class="title">Book List</h2>
+  <button type="button" class="btn btn-primary" (click)="goToAddBook()">Add Book</button>
+</div>
+
+<div class="list-container">
+  <div class="table-scroll table-border-cstm">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">book status</th>
+          <th scope="col">users status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of paginatedData; let i = index; trackBy: trackByIsbn">
+          <th scope="row">{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.currentStatus }}</td>
+          @if ( book?.transactions?.length) {
+          <td>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>user Id</th>
+                  <th>user transaction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let transaction of book.transactions">
+                  <td>{{ transaction.userId }} <button type="button" (click)="openUserDetails(transaction.userId)">ℹ️</button></td>
+                  <td>
+                    {{ (transaction.returnedDate && transaction.borrowedDate)
+                    ? ('Book returned ' + (transaction.returnedDate | date:'dd/MM/yyyy'))
+                    : ('Borrowed ' + (transaction.borrowedDate | date:'dd/MM/yyyy')) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          } @else {
+          <td>No transactions</td>
+          }
+          <td>
+            <button type="button" class="edit-btn" (click)="onEdit(book)">
+              ✏️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-pagination class="pagination" [totalItems]="data.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+  (pageChange)="changePage($event)"></app-pagination>

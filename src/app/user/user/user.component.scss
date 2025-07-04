@@ -1,0 +1,23 @@
+.split-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+    height: 80vh;
+}
+
+.left-side,
+.right-side {
+    flex: 1;
+    padding: 10px;
+    //   border: 1px solid #ccc;
+}
+
+.left-side {
+    //   width: 30%;
+    border-right: 1px solid #ccc;
+}
+
+// .right-side {
+//   width: 70%;
+// }

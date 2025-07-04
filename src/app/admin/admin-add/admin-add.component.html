@@ -1,0 +1,58 @@
+<div class="add-book-container">
+  <h2 class="title">{{isEditMode ? 'Edit ' : 'Create '}} Book</h2>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="mt-10">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.invalid">
+        Title is required.
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <label>Author</label>
+      <input type="text" formControlName="author" />
+      <div class="error" *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.invalid">
+        Author is required.
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <label>ISBN</label>
+      <input type="text" formControlName="isbn" [class.disabled-input]="isEditMode" />
+      <div class="error" *ngIf="bookForm.get('isbn')?.touched && bookForm.get('isbn')?.invalid">
+        ISBN is required.
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <label>Pages</label>
+      <input type="number" formControlName="pages" />
+      <div class="error" *ngIf="bookForm.get('pages')?.touched && bookForm.get('pages')?.invalid">
+        Pages must be a positive number.
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <label>Publication Year</label>
+      <input type="number" formControlName="publication_year" />
+      <div class="error" *ngIf="bookForm.get('publication_year')?.touched && bookForm.get('publication_year')?.invalid">
+        Enter a valid year (Minimum 1000).
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <label>Genres (comma-separated)</label>
+      <input type="text" formControlName="genres" />
+      <div class="error" *ngIf="bookForm.get('genres')?.touched && bookForm.get('genres')?.invalid">
+        At least one genre is required.
+      </div>
+    </div>
+
+    <div class="mt-10">
+
+      <button type="button" (click)="onBack()">← Back</button>
+      <button type="submit">{{isEditMode ? 'Edit ' : 'Add '}} Book</button>
+    </div>
+  </form>
+</div>

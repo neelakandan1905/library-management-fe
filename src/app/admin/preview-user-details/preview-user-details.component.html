@@ -1,0 +1,15 @@
+<div class="user-preview-container">
+    <div class="title p-10">User Details</div>
+    <p><strong>User Id:</strong> {{ user.id }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.profile.phone }}</p>
+    <p><strong>Address:</strong> {{ user.profile.address }}</p>
+    <p><strong>Date of Birth:</strong> {{ user.profile.dob }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+
+    <div style="text-align: right; margin-top: 20px;">
+        <button class="btn btn-secondary" (click)="close()">Close</button>
+    </div>
+
+</div>
