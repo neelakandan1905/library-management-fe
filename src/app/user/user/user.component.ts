@@ -1,3 +1,4 @@
+import { LoginService } from './../../login/login.service';
 import { Component } from '@angular/core';
 import { User } from '../../../model/user.model';
 import { Book } from '../../../model/book.model';
@@ -15,27 +16,16 @@ export class UserComponent {
   avlBooksCurrentPage = 1;
   borrowedBooks: Book[] = [];
   borrBooksCurrentPage = 1;
-
-  currentUser: User = {
-    id: "user001",
-    name: "Sophia Bennett",
-    email: "sophia.bennett@example.com",
-    role: "user",
-    password: "Password@0987",
-    profile: {
-      phone: "+1-555-123-0001",
-      address: "101 Oak St, Springfield",
-      dob: "1990-05-15"
-    }
-  };
+  currentUser: User | null = null;
 
 
-  constructor() {
+  constructor(private loginService: LoginService) {
+    this.currentUser =  this.loginService.currentUser;
     if (!this.booksData.length && !localStorage.getItem('books')) localStorage.setItem('books', JSON.stringify(books));
     this.booksData = JSON.parse(localStorage.getItem('books') || '[]');
     this.availableBooks = this.booksData.filter((book: Book) => book?.currentStatus === "available");
     this.borrowedBooks = this.booksData.filter(book => book.currentStatus === 'borrowed' && book.transactions.some(transaction =>
-      transaction.userId === this.currentUser.id && !transaction.returnedDate
+      transaction.userId === this.currentUser?.id && !transaction.returnedDate
     ));
   }
 
@@ -64,12 +54,13 @@ export class UserComponent {
   }
 
   borrowBook(book: Book): void {
+    if (!this.currentUser) return;
     if (this.borrowedBooks.length >= 3) {
       alert('You can only borrow Maximum of 3 books at a time.');
       return;
     }
     const transaction = {
-      userId: this.currentUser.id,
+      userId: this.currentUser?.id,
       borrowedDate: new Date().toISOString(),
     };
     book.transactions.unshift(transaction);
@@ -80,7 +71,7 @@ export class UserComponent {
   }
 
   returnBook(book: Book): void {
-    const transaction = book.transactions.find(t => t.userId === this.currentUser.id && !t.returnedDate);
+    const transaction = book.transactions.find(t => t.userId === this.currentUser?.id && !t.returnedDate);
     if (transaction) {
       transaction.returnedDate = new Date().toISOString();
       book.currentStatus = 'available';

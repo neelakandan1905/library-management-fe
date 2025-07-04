@@ -120,6 +120,18 @@ export const users: User[] = [
       address: "1001 Willow St, Springfield",
       dob: "1986-02-28"
     }
+  },
+  {
+    id: "admin001",
+    name: "Admin William Moore",
+    email: "williamadmin.moore@example.com",
+    role: "admin",
+    password: "Password@0987",
+    profile: {
+      phone: "+1-555-123-0010",
+      address: "1001 Willow St, Springfield",
+      dob: "1986-02-28"
+    }
   }
 ];
 // Note: The password is hardcoded for demonstration purposes. In a real application, passwords should be securely hashed and managed.
