@@ -21,3 +21,31 @@
 // .right-side {
 //   width: 70%;
 // }
+
+.list-container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.table-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.no-books {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.2em;
+    color: #888;
+}

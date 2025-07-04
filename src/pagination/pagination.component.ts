@@ -10,16 +10,19 @@ export class PaginationComponent implements OnInit {
   @Input() totalItems: number = 0;
   @Input() currentPage: number = 1;
   @Input() itemsPerPage: number = 10;
+  totalPages: number = 0;
+  // @Input() set totalItems(data: number) {
+  //   this.totalPages = Math.ceil(data / this.itemsPerPage);
+  //   this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  // }
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
-  totalPages: number = 0;
   pages: number[] = [];
 
   ngOnInit(): void {
     if (this.totalItems) {
       this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
       this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      console.log(this.pages);
     }
   }
 

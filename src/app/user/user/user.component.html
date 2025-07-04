@@ -1,10 +1,76 @@
 <div class="split-container">
     <div class="left-side">
         <div class="title">Books Available</div>
-        <p>This is the left side content.</p>
+        @if( availableBooks.length) {
+        <div class="list-container">
+            <div class="table-scroll table-border-cstm">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Book Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let book of paginatedAvailableBooks; let i = index; trackBy: trackByIsbn">
+                            <th scope="row">{{ ((avlBooksCurrentPage - 1) * itemsPerPage) + i + 1 }}</th>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.currentStatus }}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="borrowBook(book)">Borrow</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-pagination class="pagination" [totalItems]="availableBooks.length" [itemsPerPage]="itemsPerPage"
+            [currentPage]="avlBooksCurrentPage" (pageChange)="avlBooksCurrentPage = $event"></app-pagination>
+        } @else {
+        <div class="no-books">
+            <div>No books available to Borrow.</div>
+        </div>
+        }
     </div>
     <div class="right-side">
         <div class="title">Books Borrowed</div>
-        <p>This is the right side content.</p>
+        @if (borrowedBooks.length) {
+        <div class="list-container">
+            <div class="table-scroll table-border-cstm">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Book Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let book of paginatedBorrowedBooks; let i = index; trackBy: trackByIsbn">
+                            <th scope="row">{{ ((borrBooksCurrentPage - 1) * itemsPerPage) + i + 1 }}</th>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.currentStatus }}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="returnBook(book)">Return</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-pagination class="pagination" [totalItems]="borrowedBooks.length" [itemsPerPage]="itemsPerPage"
+            [currentPage]="borrBooksCurrentPage" (pageChange)="borrBooksCurrentPage = $event"></app-pagination>
+        } @else {
+        <div class="no-books">
+            <div>No books borrowed yet.</div>
+        </div>
+        }
     </div>
 </div>
